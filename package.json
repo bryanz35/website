@@ -1,0 +1,9 @@
+{
+  "name": "website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "dev": "python -m http.server 8000"
+  }
+}

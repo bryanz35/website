@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  --fg: #111;
+  --muted: #777;
+  --bg: #fff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.6 "JetBrains Mono", ui-monospace, monospace;
+}
+
+a { color: inherit; text-underline-offset: 3px; }
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2.5rem 1rem;
+}
+nav a { text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+
+/* margin: auto centres main in the space below the nav, both ways. */
+main {
+  width: 100%;
+  max-width: 56ch;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+.photo {
+  float: right;
+  width: 9rem;
+  height: 9rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  margin: 0 0 1rem 1.5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+}
+
+main p { margin: 0; }
+
+/* Empty lines keep their height while the intro types them. */
+[data-vim] { min-height: 1lh; }
+
+/* Hide the authored text until the player takes over; reveal anyway after 2s in case the script fails to load. */
+.js [data-vim] { visibility: hidden; animation: reveal 0s 2s forwards; }
+.vim [data-vim] { visibility: visible; }
+@keyframes reveal { to { visibility: visible; } }
+
+/* Cursor: block in normal mode, bar in insert mode. Re-rendered on every key, which restarts the blink. */
+.cur {
+  background: var(--fg);
+  color: var(--bg);
+  animation: blink 1s step-end 0.5s infinite;
+}
+.cur.ins {
+  background: none;
+  color: inherit;
+  box-shadow: inset 2px 0 var(--fg);
+}
+@keyframes blink {
+  50% { background: none; color: inherit; box-shadow: none; }
+}
+
+/* Vim command chips, thrown from the bottom-right corner. */
+#keys {
+  position: fixed;
+  right: 2.5rem;
+  bottom: 2.5rem;
+  pointer-events: none;
+}
+#keys kbd {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font: 600 1.3em/1.6 "JetBrains Mono", ui-monospace, monospace;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--fg);
+  border-radius: 4px;
+  padding: 0 0.5em;
+  white-space: pre;
+}
+
+@media (max-width: 600px) {
+  nav { gap: 2rem; padding: 1.5rem 1rem; }
+  .photo { float: none; display: block; margin: 0 0 1.5rem; }
+  #keys { right: 1.25rem; bottom: 1.25rem; }
+}
