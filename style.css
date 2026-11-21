@@ -107,3 +107,7 @@ main p { margin: 0; }
   .photo { float: none; display: block; margin: 0 0 1.5rem; }
   #keys { right: 1.25rem; bottom: 1.25rem; }
 }
+
+/* Rendered posts need the block spacing the home page strips. */
+article :is(p, ul) { margin: 0 0 1rem; }
+main:has(article) { max-width: 120ch; }

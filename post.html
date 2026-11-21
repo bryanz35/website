@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing · Bryan Zhong</title>
+  <link rel="preload" href="assets/fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { marked } from 'https://cdn.jsdelivr.net/npm/marked@15.0.12/lib/marked.esm.js';
+    // ?p only picks a same-origin path under blog/, and the markdown there is ours, so its HTML is trusted.
+    const post = document.querySelector('article');
+    const res = await fetch(`blog/${new URLSearchParams(location.search).get('p')}.md`);
+    post.innerHTML = res.ok ? marked.parse(await res.text()) : '<p>Post not found.</p>';
+    document.title = `${post.querySelector('h1, h2, h3')?.textContent ?? 'Writing'} · Bryan Zhong`;
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="./">about</a>
+      <a href="#">projects</a>
+      <a href="writing.html">writing</a>
+    </nav>
+  </header>
+
+  <main>
+    <article></article>
+  </main>
+</body>
+</html>
